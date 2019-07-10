@@ -13,7 +13,13 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\AspCoreDemoApp.Core\AspCoreDemoApp.Core.csproj" />
     <ProjectReference Include="..\AspCoreDemoApp.Data\AspCoreDemoApp.Data.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Pages\Videos\" />
   </ItemGroup>
 
 </Project>

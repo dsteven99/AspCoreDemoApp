@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AspCoreDemoApp.Core;
 using AspCoreDemoApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,9 @@ namespace AspCoreDemoApp
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddScoped<IData<Channel>, SqlChannelData>();
+            services.AddScoped<IData<Video>, SqlVideoData>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
