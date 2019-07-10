@@ -24,7 +24,10 @@ namespace AspCoreDemoApp.Pages
         public IActionResult OnGet(int id)
         {
             Channel = channelData.GetById(id);
-
+            if (Channel == null)
+            {
+                return BadRequest();
+            }
             return Page();
         }
 

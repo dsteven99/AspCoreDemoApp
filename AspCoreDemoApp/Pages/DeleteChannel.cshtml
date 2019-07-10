@@ -4,5 +4,13 @@
     ViewData["Title"] = "DeleteChannel";
 }
 
-<h1>DeleteChannel</h1>
+<h4>Delete Course</h4>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete '@Model.Channel.Title'?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-outline-danger">Yes!</button>
+    <a asp-page="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
 
