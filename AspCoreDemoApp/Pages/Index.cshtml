@@ -4,7 +4,75 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+<h4>Channels</h4>
+<form action="Index" method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control"
+                   asp-for="SearchTerm" title="Enter Search  Term" />
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+<a asp-page="AddChannel" class="btn btn-success">Add New</a>
+<div id="channelTable" style="max-height:750px; overflow:auto;margin-top:20px">
+    <table class="table-fixed" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Title</th>
+                <th style="padding-right:7px;">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var channel in Model.Channels)
+            {
+            <tr>
+                <td width="3%">
+                    <a class="btn btn-lg" asp-page="./Videos/Index"
+                       asp-route-id="@channel.Id" title="Videos">
+                        <i class="fa fa-film"></i>
+                    </a>
+
+                </td>
+                <td width="3%">
+                    <a class="btn btn-lg" asp-page="./EditChannel"
+                       asp-route-id="@channel.Id" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </a>
+
+                </td>
+                <td width="3%">
+                    <a class="btn btn-lg" asp-page="./DeleteChannel"
+                       asp-route-id="@channel.Id" title="Delete">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+                <td width="14%">@channel.Title</td>
+                <td width="77%" style="padding-right:7px;">@channel.Description</td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#channelTable').scroll(function () {
+            localStorage['ChannelIndex'] = $('#channelTable').scrollTop();
+        });
+        $(document).ready(function () {
+            $('#channelTable').scrollTop(localStorage['ChannelIndex']);
+        });
+    </script>
+}

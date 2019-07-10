@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspCoreDemoApp.Core;
+using AspCoreDemoApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,9 +11,21 @@ namespace AspCoreDemoApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
-        {
+        private readonly IData<Channel> channelData;
 
+        public IEnumerable<Channel> Channels { get; set; }
+        [TempData]
+        public string Message { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+        public IndexModel(IData<Channel> channelData)
+        {
+            this.channelData = channelData;
+        }
+        public IActionResult OnGet()
+        {
+            Channels = channelData.GetItems(SearchTerm);
+            return Page();
         }
     }
 }
