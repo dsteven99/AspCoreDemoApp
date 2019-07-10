@@ -18,9 +18,4 @@
     <ProjectReference Include="..\AspCoreDemoApp.Data\AspCoreDemoApp.Data.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Pages\Videos\" />
-  </ItemGroup>
-
 </Project>
