@@ -4,5 +4,24 @@
     ViewData["Title"] = "EditChannel";
 }
 
-<h1>EditChannel</h1>
+<h4>Edit Channel @Model.Channel.Title</h4>
+
+<form method="post">
+    <input type="hidden" asp-for="Channel.Id" />
+    <div class="form-group">
+        <label asp-for="Channel.Title">Title</label>
+        <input asp-for="Channel.Title" class="form-control" />
+        <span class="text-danger" asp-validation-for="Channel.Title"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Channel.Description">Description</label>
+        <textarea asp-for="Channel.Description" class="form-control" style="width:100%"></textarea>
+        <span class="text-danger" asp-validation-for="Channel.Description"></span>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Save</button>
+    <a asp-page="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

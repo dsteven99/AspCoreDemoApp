@@ -40,6 +40,7 @@ namespace AspCoreDemoApp.Pages
 
             channelData.Commit();
 
+            TempData["Message"] = "Channel saved!";
             return RedirectToPage("Index");
         }
     }
