@@ -4,5 +4,74 @@
     ViewData["Title"] = "Videos";
 }
 
-<h1>Videos</h1>
+<h4>Videos on Channel '@Model.Channel.Title'</h4>
+
+<form action="Index" method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control"
+                   asp-for="SearchTerm" title="Enter Search Term" />
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+<a asp-page="AddVideo" class="btn btn-outline-success" asp-route-channelId="@Model.Channel.Id">Add New</a>
+<div id="videoTable" style="max-height:750px; overflow:auto;margin-top:20px">
+    <table class="table-fixed" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Title</th>
+                <th style="padding-right:7px;">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var video in Model.Videos)
+            {
+                <tr>
+                    <td width="3%">
+                        <a class="btn btn-lg" asp-page="./Screen"
+                           asp-route-id="@video.Id" title="Videos">
+                            <i class="fa fa-youtube-play"></i>
+                        </a>
+
+                    </td>
+                    <td width="3%">
+                        <a class="btn btn-lg" asp-page="./EditVideo"
+                           asp-route-id="@video.Id" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </a>
+
+                    </td>
+                    <td width="3%">
+                        <a class="btn btn-lg" asp-page="./DeleteVideo"
+                           asp-route-id="@video.Id" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                    <td width="20%" style="padding-right:10px">@video.Title</td>
+                    <td width="71%" style="padding-right:7px;">@video.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#videoTable').scroll(function () {
+            localStorage['VideoIndex'] = $('#videoTable').scrollTop();
+        });
+        $(document).ready(function () {
+            $('#videoTable').scrollTop(localStorage['VideoIndex']);
+        });
+    </script>
+}
+
 
