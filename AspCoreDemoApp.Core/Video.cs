@@ -14,6 +14,12 @@ namespace AspCoreDemoApp.Core
         [Required]
         public string Title { get; set; }
         public  string Description { get; set; }
-        public string Url { get; set; }
+        [StringLength(250)]
+        [Required]
+        public string code { get; set; }
+        [Required]
+        public int width { get; set; }
+        [Required]
+        public int height { get; set; }
     }
 }
