@@ -3,80 +3,67 @@
 @{
     ViewData["Title"] = "Videos";
 }
-
-<h4>Videos on Channel '@Model.Channel.Title'</h4>
-
-<form action="Index" method="get">
-    <div class="form-group">
-        <div class="input-group">
-            <input type="search" class="form-control"
-                   asp-for="SearchTerm" title="Enter Search Term" />
-            <span class="input-group-btn">
-                <button class="btn btn-default">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
+<div class="container">
+    <h4>Videos on Channel '@Model.Channel.Title'</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="Index" method="get">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="search" class="form-control"
+                               asp-for="SearchTerm" title="Enter Search Term" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
-<a asp-page="AddVideo" class="btn btn-outline-success" asp-route-channelId="@Model.Channel.Id">Add New</a>
-<div id="videoTable" style="max-height:750px; overflow:auto;margin-top:20px">
-    <table class="table-fixed" style="width:100%">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Title</th>
-                <th style="padding-right:7px;">Description</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var video in Model.Videos)
-            {
-            <tr>
-                <td width="3%">
-                    <a class="btn btn-lg" asp-page="./Screen"
-                       asp-route-id="@video.Id" title="Play">
-                        @if (video.ImageUrl == null)
-                        {
-                            <i class="fa fa-youtube-play"></i>
-                        }
-                        else
-                        {
-                            <img src="@video.ImageUrl" alt="video image" />
-                        }
-                    </a>
-                </td>
-                <td width="40%" style="padding-right:10px" valign="top">@video.Title</td>
-                <td width="51%" style="padding-right:7px;"  valign="top">@video.Description</td>
-                <td width="3%" valign="top">
+    <div class="row">
+        <div class="col-md-12">
+            <a asp-page="AddVideo" class="btn btn-outline-success" asp-route-channelId="@Model.Channel.Id" style="margin-bottom:10px;">Add New</a>
+        </div>
+    </div>
+    @foreach (var video in Model.Videos)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <a asp-page="./Screen"
+                   asp-route-id="@video.Id" title="Play">
+                    @if (video.ImageUrl == null)
+                    {
+                        <i class="fa fa-youtube-play"></i>
+                    }
+                    else
+                    {
+                        <img src="@video.ImageUrl" alt="video image" />
+                    }
+                </a>
+            </div>
+            <div class="col-md-8">
+                <div><b>@video.Title</b></div>
+                <div>@video.Description</div>
+                <div>
                     <a class="btn btn-lg" asp-page="./EditVideo"
                        asp-route-id="@video.Id" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
-                </td>
-                <td width="3%" valign="top">
                     <a class="btn btn-lg" asp-page="./DeleteVideo"
                        asp-route-id="@video.Id" title="Delete">
                         <i class="fa fa-trash"></i>
                     </a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
 </div>
 
 @section Scripts {
-    <script type="text/javascript">
-        $('#videoTable').scroll(function () {
-            localStorage['VideoIndex'] = $('#videoTable').scrollTop();
-        });
-        $(document).ready(function () {
-            $('#videoTable').scrollTop(localStorage['VideoIndex']);
-        });
-    </script>
+
 }
 
 

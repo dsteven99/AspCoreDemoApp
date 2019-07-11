@@ -23,20 +23,19 @@
     </div>
 </form>
 <a asp-page="AddChannel" class="btn btn-outline-success">Add New</a>
-<div id="channelTable" style="max-height:750px; overflow:auto;margin-top:20px">
-    <table class="table-fixed" style="width:100%">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Title</th>
-                <th style="padding-right:7px;">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var channel in Model.Channels)
-            {
+<table class="table-fixed" style="width:100%;margin-top:10px">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Title</th>
+            <th style="padding-right:7px;">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var channel in Model.Channels)
+        {
             <tr>
                 <td width="3%">
                     <a class="btn btn-lg" asp-page="./Videos/Index"
@@ -61,18 +60,10 @@
                 <td width="20%" style="padding-right:10px">@channel.Title</td>
                 <td width="71%" style="padding-right:7px;">@channel.Description</td>
             </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
 
 @section Scripts {
-    <script type="text/javascript">
-        $('#channelTable').scroll(function () {
-            localStorage['ChannelIndex'] = $('#channelTable').scrollTop();
-        });
-        $(document).ready(function () {
-            $('#channelTable').scrollTop(localStorage['ChannelIndex']);
-        });
-    </script>
+
 }
