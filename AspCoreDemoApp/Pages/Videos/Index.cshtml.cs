@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspCoreDemoApp.Core;
 using AspCoreDemoApp.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,6 +19,7 @@ namespace AspCoreDemoApp.Pages.Videos
         public Channel Channel { get; set; }
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
+        public string ChannelSearchTerm { get; set; }
         public IndexModel(IData<Channel> channelData, IData<Video> videoData)
         {
             this.channelData = channelData;
@@ -31,6 +33,9 @@ namespace AspCoreDemoApp.Pages.Videos
             {
                 return BadRequest();
             }
+
+           
+            ChannelSearchTerm = HttpContext.Session.GetString("ChannelSearchTerm");
 
             Videos = videoData.GetItems(SearchTerm).Where(v => v.ChannelId == id);
 

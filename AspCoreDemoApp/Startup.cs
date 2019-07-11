@@ -44,7 +44,11 @@ namespace AspCoreDemoApp
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .AddSessionStateTempDataProvider()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +67,7 @@ namespace AspCoreDemoApp
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc();
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspCoreDemoApp.Core;
 using AspCoreDemoApp.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -24,6 +25,11 @@ namespace AspCoreDemoApp.Pages
         }
         public IActionResult OnGet()
         {
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                HttpContext.Session.SetString("ChannelSearchTerm", SearchTerm);
+            }
+            
             Channels = channelData.GetItems(SearchTerm);
             return Page();
         }
