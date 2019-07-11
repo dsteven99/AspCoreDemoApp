@@ -24,7 +24,9 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a asp-page="AddVideo" class="btn btn-outline-success" asp-route-channelId="@Model.Channel.Id" style="margin-bottom:10px;">Add New</a>
+            <a asp-page="AddVideo" class="btn btn-link btn-sm" asp-route-channelId="@Model.Channel.Id" style="margin-bottom:10px;">
+                <i class="fa fa-plus"></i>&nbsp;Add New
+            </a>
         </div>
     </div>
     @foreach (var video in Model.Videos)
@@ -47,11 +49,11 @@
                 <div><b>@video.Title</b></div>
                 <div>@video.Description</div>
                 <div>
-                    <a class="btn btn-lg" asp-page="./EditVideo"
+                    <a asp-page="./EditVideo"
                        asp-route-id="@video.Id" title="Edit">
                         <i class="fa fa-edit"></i>
-                    </a>
-                    <a class="btn btn-lg" asp-page="./DeleteVideo"
+                    </a>&nbsp;&nbsp;
+                    <a asp-page="./DeleteVideo"
                        asp-route-id="@video.Id" title="Delete">
                         <i class="fa fa-trash"></i>
                     </a>
