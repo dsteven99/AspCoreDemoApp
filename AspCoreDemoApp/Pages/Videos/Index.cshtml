@@ -3,69 +3,64 @@
 @{
     ViewData["Title"] = "Videos";
 }
-<div class="container">
-    <h4>Videos on Channel '@Model.Channel.Title'</h4>
-    <div class="row">
-        <div class="col-md-12">
-            <form action="Index" method="get">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="search" class="form-control"
-                               asp-for="SearchTerm" title="Enter Search Term" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
-                    </div>
+<h4>Videos on Channel '@Model.Channel.Title'</h4>
+<div class="row">
+    <div class="col-md-12">
+        <form action="Index" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="search" class="form-control"
+                           asp-for="SearchTerm" title="Enter Search Term" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a asp-page="AddVideo" class="btn btn-link btn-sm" asp-route-channelId="@Model.Channel.Id" style="margin-bottom:10px;">
+            <i class="fa fa-plus"></i>&nbsp;Add New
+        </a>
+    </div>
+</div>
+@foreach (var video in Model.Videos)
+{
     <div class="row">
-        <div class="col-md-12">
-            <a asp-page="AddVideo" class="btn btn-link btn-sm" asp-route-channelId="@Model.Channel.Id" style="margin-bottom:10px;">
-                <i class="fa fa-plus"></i>&nbsp;Add New
+        <div class="col-md-4">
+            <a asp-page="./Screen"
+               asp-route-id="@video.Id" title="Play">
+                @if (video.ImageUrl == null)
+                {
+                    <i class="fa fa-youtube-play"></i>
+                }
+                else
+                {
+                    <img src="@video.ImageUrl" alt="video image" />
+                }
             </a>
         </div>
-    </div>
-    @foreach (var video in Model.Videos)
-    {
-        <div class="row">
-            <div class="col-md-4">
-                <a asp-page="./Screen"
-                   asp-route-id="@video.Id" title="Play">
-                    @if (video.ImageUrl == null)
-                    {
-                        <i class="fa fa-youtube-play"></i>
-                    }
-                    else
-                    {
-                        <img src="@video.ImageUrl" alt="video image" />
-                    }
+        <div class="col-md-8">
+            <div><b>@video.Title</b></div>
+            <div>@video.Description</div>
+            <div>
+                <a asp-page="./EditVideo"
+                   asp-route-id="@video.Id" title="Edit">
+                    <i class="fa fa-edit"></i>
+                </a>&nbsp;&nbsp;
+                <a asp-page="./DeleteVideo"
+                   asp-route-id="@video.Id" title="Delete">
+                    <i class="fa fa-trash"></i>
                 </a>
             </div>
-            <div class="col-md-8">
-                <div><b>@video.Title</b></div>
-                <div>@video.Description</div>
-                <div>
-                    <a asp-page="./EditVideo"
-                       asp-route-id="@video.Id" title="Edit">
-                        <i class="fa fa-edit"></i>
-                    </a>&nbsp;&nbsp;
-                    <a asp-page="./DeleteVideo"
-                       asp-route-id="@video.Id" title="Delete">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </div>
-            </div>
         </div>
-        <hr />
-    }
-</div>
-
-@section Scripts {
-
+    </div>
+    <hr />
 }
-
+@section Scripts {
+}
 
