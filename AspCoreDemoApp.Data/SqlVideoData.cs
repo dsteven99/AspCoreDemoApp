@@ -40,7 +40,7 @@ namespace AspCoreDemoApp.Data
 
         public Video GetById(int id)
         {
-            return db.Videos.SingleOrDefault(c => c.Id == id);
+            return db.Videos.Include(v => v.Channel).SingleOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Video> GetItems(string searchTerm)

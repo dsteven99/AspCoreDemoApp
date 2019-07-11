@@ -1,0 +1,20 @@
+﻿@page "{id:int}"
+@model AspCoreDemoApp.Pages.Videos.ScreenModel
+@{
+    ViewData["Title"] = "Screen";
+}
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h4>@Model.Video.Title</h4>
+
+            <iframe width="@Model.Video.width.ToString()" height="@Model.Video.width.ToString()" src="https://www.youtube-nocookie.com/embed/@Model.Video.code" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <a asp-page="Index" class="btn btn-outline-secondary" asp-route-id="@Model.Video.Channel.Id">Back</a>
+        </div>
+    </div>
+</div>
