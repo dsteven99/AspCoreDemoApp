@@ -21,5 +21,7 @@ namespace AspCoreDemoApp.Core
         public int width { get; set; }
         [Required]
         public int height { get; set; }
+        public string ImageUrl { get; set; }
+
     }
 }

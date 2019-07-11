@@ -25,39 +25,45 @@
         <thead>
             <tr>
                 <th></th>
-                <th></th>
-                <th></th>
                 <th>Title</th>
                 <th style="padding-right:7px;">Description</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var video in Model.Videos)
             {
-                <tr>
-                    <td width="3%">
-                        <a class="btn btn-lg" asp-page="./Screen"
-                           asp-route-id="@video.Id" title="Play">
+            <tr>
+                <td width="3%">
+                    <a class="btn btn-lg" asp-page="./Screen"
+                       asp-route-id="@video.Id" title="Play">
+                        @if (video.ImageUrl == null)
+                        {
                             <i class="fa fa-youtube-play"></i>
-                        </a>
+                        }
+                        else
+                        {
+                            <img src="@video.ImageUrl" alt="video image" />
+                        }
+                    </a>
+                </td>
+                <td width="40%" style="padding-right:10px" valign="top">@video.Title</td>
+                <td width="51%" style="padding-right:7px;"  valign="top">@video.Description</td>
+                <td width="3%" valign="top">
+                    <a class="btn btn-lg" asp-page="./EditVideo"
+                       asp-route-id="@video.Id" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+                <td width="3%" valign="top">
+                    <a class="btn btn-lg" asp-page="./DeleteVideo"
+                       asp-route-id="@video.Id" title="Delete">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
 
-                    </td>
-                    <td width="3%">
-                        <a class="btn btn-lg" asp-page="./EditVideo"
-                           asp-route-id="@video.Id" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </a>
-
-                    </td>
-                    <td width="3%">
-                        <a class="btn btn-lg" asp-page="./DeleteVideo"
-                           asp-route-id="@video.Id" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                    <td width="40%" style="padding-right:10px">@video.Title</td>
-                    <td width="51%" style="padding-right:7px;">@video.Description</td>
-                </tr>
+            </tr>
             }
         </tbody>
     </table>
