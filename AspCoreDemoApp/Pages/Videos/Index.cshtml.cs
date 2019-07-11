@@ -27,6 +27,11 @@ namespace AspCoreDemoApp.Pages.Videos
         }
         public IActionResult OnGet(int id)
         {
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                HttpContext.Session.SetString("VideoSearchTerm", SearchTerm);
+            }
+
             Channel = channelData.GetById(id);
 
             if (Channel == null)

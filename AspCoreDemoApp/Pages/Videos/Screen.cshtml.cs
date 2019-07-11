@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspCoreDemoApp.Core;
 using AspCoreDemoApp.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,6 +13,8 @@ namespace AspCoreDemoApp.Pages.Videos
     public class ScreenModel : PageModel
     {
         private readonly IData<Video> videoData;
+
+        public string VideoSearchTerm { get; set; }
 
         public ScreenModel(IData<Video> videoData)
         {
@@ -28,6 +31,8 @@ namespace AspCoreDemoApp.Pages.Videos
             {
                 return BadRequest();
             }
+
+            VideoSearchTerm = HttpContext.Session.GetString("VideoSearchTerm");
 
             return Page();
         }
