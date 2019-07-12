@@ -36,7 +36,7 @@
 @foreach (var video in Model.Videos)
 {
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <a asp-page="./Screen"
                asp-route-id="@video.Id" title="Play">
                 @if (video.ImageUrl == null)
@@ -45,11 +45,11 @@
                 }
                 else
                 {
-                    <img src="@video.ImageUrl" alt="video image" />
+                    <img src="@video.ImageUrl" alt="video image" width="175" />
                 }
             </a>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div><b>@video.Title</b></div>
             <div>@video.Description</div>
             <div>

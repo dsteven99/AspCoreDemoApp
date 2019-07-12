@@ -4,19 +4,20 @@
     ViewData["Title"] = "Screen";
 }
 
+<div class="row">
+    <div class="col-md-12">
+        <a asp-page="./Index" class="btn btn-link btn-sm" asp-route-id="@Model.Video.Channel.Id"
+           asp-route-SearchTerm="@Model.VideoSearchTerm">
+            <i class="fa fa-arrow-circle-left"></i>&nbsp;Back to Videos
+        </a>
+    </div>
+</div>
 <div class="row text-center">
     <div class="col-md-12">
-        <h4>@Model.Video.Title</h4>
-
         <iframe width="@Model.Video.width.ToString()" height="@Model.Video.width.ToString()"
                 src="https://www.youtube-nocookie.com/embed/@Model.Video.code"
                 frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
     </div>
 </div>
-<div class="row text-center">
-    <div class="col-md-12">
-        <a asp-page="Index" class="btn btn-outline-secondary" asp-route-id="@Model.Video.Channel.Id" 
-            asp-route-SearchTerm="@Model.VideoSearchTerm">Back</a>
-    </div>
-</div>
+
