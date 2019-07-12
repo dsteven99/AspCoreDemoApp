@@ -4,5 +4,45 @@
     ViewData["Title"] = "EditVideo";
 }
 
-<h1>EditVideo</h1>
+<h4>Edit Video</h4>
+<form method="post">
+    <input type="hidden" asp-for="Video.Id" />
+    <input type="hidden" asp-for="Video.ChannelId" />
+    <div class="form-group">
+        <label asp-for="Video.Title">Title</label>
+        <input asp-for="Video.Title" class="form-control" />
+        <span class="text-danger" asp-validation-for="Video.Title"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Video.Description">Description</label>
+        <textarea asp-for="Video.Description" class="form-control" style="width:100%"></textarea>
+        <span class="text-danger" asp-validation-for="Video.Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Video.code">Code</label>
+        <input asp-for="Video.code" class="form-control" />
+        <span class="text-danger" asp-validation-for="Video.code"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Video.width">Width</label>
+        <input asp-for="Video.width" class="form-control" />
+        <span class="text-danger" asp-validation-for="Video.width"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Video.height">Height</label>
+        <input asp-for="Video.height" class="form-control" />
+        <span class="text-danger" asp-validation-for="Video.height"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Video.ImageUrl">Image URL</label>
+        <input asp-for="Video.ImageUrl" class="form-control" />
+        <span class="text-danger" asp-validation-for="Video.ImageUrl"></span>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" asp-route-channelId="@Model.Channel.Id">Save</button>
+    <a asp-page="Index" class="btn btn-outline-secondary" asp-route-id="@Model.Channel.Id">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
 
