@@ -1,8 +1,15 @@
 ﻿@page "{id:int}"
 @model AspCoreDemoApp.Pages.Videos.DeleteVideoModel
 @{
-    ViewData["Title"] = "DeleteVideo";
+    ViewData["Title"] = "Delete Video";
 }
 
-<h1>DeleteVideo</h1>
+<h4>Delete Video</h4>
+<div class="alert alert-danger">
+    Are you sure you want to delete '@Model.Video.Title'?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-outline-danger">Yes!</button>
+    <a asp-page="Index" class="btn btn-outline-secondary" asp-route-id="@Model.Video.ChannelId">Cancel</a>
+</form>
 
