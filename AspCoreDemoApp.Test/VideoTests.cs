@@ -240,7 +240,7 @@ namespace AspCoreDemoApp.Test
                 videoData.Add(video);
 
                 //Assert
-                Assert.Throws<Microsoft.EntityFrameworkCore.DbUpdateException>(() => videoData.Commit());
+                Assert.Throws<DbUpdateException>(() => videoData.Commit());
             }
         }
     }
