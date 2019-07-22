@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using AspCoreDemoApp.Data;
 using AspCoreDemoApp.Core;
 using System.Linq;
+using Microsoft.Data.Sqlite;
 
 namespace AspCoreDemoApp.Test
 {
@@ -121,6 +122,108 @@ namespace AspCoreDemoApp.Test
 
                 //Assert
                 Assert.Equal(2, videos.Count());
+            }
+        }
+
+        [Fact]
+        public void Add_VideoWithoutTitle_ReturnsDbUpdateException()
+        {
+            //Arrange
+            var connectionStringBuilder =
+                new SqliteConnectionStringBuilder { DataSource = ":memory:" };
+            var connection = new SqliteConnection(connectionStringBuilder.ToString());
+            var options = new DbContextOptionsBuilder<VideoDbContext>()
+                .UseSqlite(connection)
+                .Options;
+
+            using (var context = new VideoDbContext(options))
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+                context.Channels.Add(new Channel()
+                {
+                    Id = 1,
+                    Title = "Singer Songwriters",
+                    Description = "A channel filled with singer songwriters",
+                    LastModified = DateTime.Now
+                });
+
+                context.SaveChanges();
+
+            }
+
+            using (var context = new VideoDbContext(options))
+            {
+               
+                SqlVideoData videoData = new SqlVideoData(context);
+                var video = new Video()
+                {
+                    Id = 1,
+                    ChannelId = 1,
+                    Description = "",
+                    code = "",
+                    ImageUrl = "",
+                    width = 740,
+                    height = 315
+                };
+
+                //Act
+                videoData.Add(video);
+
+                //Assert
+                Assert.Throws<Microsoft.EntityFrameworkCore.DbUpdateException>(() => videoData.Commit());
+            }
+        }
+
+
+        [Fact]
+        public void Add_VideoWithoutValidChannelId_ReturnsDbUpdateException()
+        {
+            //Arrange
+            var connectionStringBuilder =
+                new SqliteConnectionStringBuilder { DataSource = ":memory:" };
+            var connection = new SqliteConnection(connectionStringBuilder.ToString());
+            var options = new DbContextOptionsBuilder<VideoDbContext>()
+                .UseSqlite(connection)
+                .Options;
+
+            using (var context = new VideoDbContext(options))
+            {
+                context.Database.OpenConnection();
+                context.Database.EnsureCreated();
+
+                context.Channels.Add(new Channel()
+                {
+                    Id = 1,
+                    Title = "Singer Songwriters",
+                    Description = "A channel filled with singer songwriters",
+                    LastModified = DateTime.Now
+                });
+
+                context.SaveChanges();
+
+            }
+
+            using (var context = new VideoDbContext(options))
+            {
+                SqlVideoData videoData = new SqlVideoData(context);
+                var video = new Video()
+                {
+                    Id = 1,
+                    ChannelId = 2,
+                    Title = "This is a Title",
+                    Description = "",
+                    code = "",
+                    ImageUrl = "",
+                    width = 740,
+                    height = 315
+                };
+
+                //Act
+                videoData.Add(video);
+
+                //Assert
+                Assert.Throws<Microsoft.EntityFrameworkCore.DbUpdateException>(() => videoData.Commit());
             }
         }
     }
