@@ -5,13 +5,21 @@ using AspCoreDemoApp.Data;
 using AspCoreDemoApp.Core;
 using System.Linq;
 using Microsoft.Data.Sqlite;
+using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Xunit.Abstractions;
 
 namespace AspCoreDemoApp.Test
 {
     
     public class VideoTests
     {
-        
+        private readonly ITestOutputHelper output;
+
+        public VideoTests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
         [Fact]
         public void GetItems_SearchTermIsJohnDenver_ReturnsVideosWithSearchTermInTitle()
         {
@@ -180,10 +188,19 @@ namespace AspCoreDemoApp.Test
         public void Add_VideoWithoutValidChannelId_ReturnsDbUpdateException()
         {
             //Arrange
+
+            //var logs = new List<string>();
+
             var connectionStringBuilder =
                 new SqliteConnectionStringBuilder { DataSource = ":memory:" };
             var connection = new SqliteConnection(connectionStringBuilder.ToString());
             var options = new DbContextOptionsBuilder<VideoDbContext>()
+                .UseLoggerFactory( new LoggerFactory(
+                    new[] { new LogToActionLoggerProvider((log) =>
+                    {
+                        //logs.Add(log);
+                        this.output.WriteLine(log);  //writes to test explorer
+                    })}))
                 .UseSqlite(connection)
                 .Options;
 
