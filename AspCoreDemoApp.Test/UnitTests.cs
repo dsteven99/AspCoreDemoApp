@@ -21,11 +21,11 @@ using Microsoft.AspNetCore.Mvc.Routing;
 namespace AspCoreDemoApp.Test
 {
     
-    public class VideoTests
+    public class UnitTests
     {
         private readonly ITestOutputHelper output;
 
-        public VideoTests(ITestOutputHelper output)
+        public UnitTests(ITestOutputHelper output)
         {
             this.output = output;
         }
