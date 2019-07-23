@@ -8,6 +8,15 @@ using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
+using AspCoreDemoApp.Pages;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Moq;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace AspCoreDemoApp.Test
 {
@@ -21,6 +30,7 @@ namespace AspCoreDemoApp.Test
             this.output = output;
         }
         [Fact]
+        [Trait("Category", "EF")]
         public void GetItems_SearchTermIsJohnDenver_ReturnsVideosWithSearchTermInTitle()
         {
             //Arrange
@@ -77,6 +87,7 @@ namespace AspCoreDemoApp.Test
         }
 
         [Fact]
+        [Trait("Category", "EF")]
         public void GetItems_EmptySearchTerm_ReturnsAllVideos()
         {
             //Arrange
@@ -134,6 +145,7 @@ namespace AspCoreDemoApp.Test
         }
 
         [Fact]
+        [Trait("Category", "EF")]
         public void Add_VideoWithoutTitle_ReturnsDbUpdateException()
         {
             //Arrange
@@ -185,6 +197,7 @@ namespace AspCoreDemoApp.Test
 
 
         [Fact]
+        [Trait("Category", "EF")]
         public void Add_VideoWithoutValidChannelId_ReturnsDbUpdateException()
         {
             //Arrange
