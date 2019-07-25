@@ -30,7 +30,6 @@ namespace AspCoreDemoApp
         {
             services.AddDbContextPool<VideoDbContext>(options =>
             {
-                //options.UseInMemoryDatabase("VideoInMemoryDB");
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
