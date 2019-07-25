@@ -22,7 +22,7 @@ namespace AspCoreDemoApp.Test
 
                 // Add a database context (ApplicationDbContext) using an in-memory 
                 // database for testing.
-                services.AddDbContext<VideoDbContext>(options =>
+                services.AddDbContextPool<VideoDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                     options.UseInternalServiceProvider(serviceProvider);

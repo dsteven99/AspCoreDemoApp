@@ -8,11 +8,11 @@ using Xunit;
 
 namespace AspCoreDemoApp.Test
 {
-    public class IntegrationTest : IClassFixture<WebApplicationFactory<AspCoreDemoApp.Startup>>
+    public class IntegrationTest : IClassFixture<CustomWebApplicationFactory<AspCoreDemoApp.Startup>>
     {
-        private readonly WebApplicationFactory<Startup> factory;
+        private readonly CustomWebApplicationFactory<Startup> factory;
 
-        public IntegrationTest(WebApplicationFactory<AspCoreDemoApp.Startup> factory)
+        public IntegrationTest(CustomWebApplicationFactory<AspCoreDemoApp.Startup> factory)
         {
             this.factory = factory;
         }
