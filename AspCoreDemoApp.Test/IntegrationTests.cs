@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using AspCoreDemoApp.Core;
 
 namespace AspCoreDemoApp.Test
 {
@@ -99,6 +100,31 @@ namespace AspCoreDemoApp.Test
             Assert.Equal(HttpStatusCode.OK, defaultPage.StatusCode);
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
             Assert.Equal("/Videos/1", response.Headers.Location.OriginalString);
+        }
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        public async Task GetChannelData_ProvideChannelNameInPage()
+        {
+            //Arrange
+            var client = factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.AddScoped<IData<Channel>, TestSqlChannelData>();
+                });
+            })
+       .CreateClient();
+
+            //Act
+            var defaultPage = await client.GetAsync("/Videos/1");
+            var content = await HtmlHelpers.GetDocumentAsync(defaultPage);
+            var h4Element = content.QuerySelector("h4");
+
+            //Assert
+            Assert.Contains("", h4Element.InnerHtml);
+                
+
         }
     }
 }
