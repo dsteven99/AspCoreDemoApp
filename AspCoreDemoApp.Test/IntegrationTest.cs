@@ -31,9 +31,9 @@ namespace AspCoreDemoApp.Test
         [InlineData("/AddChannel")]
         [InlineData("/Videos/Index/1")]
         [InlineData("/Videos/AddVideo/1")]
-        [InlineData("/Videos/EditVideo/1")]
-        [InlineData("/Videos/DeleteVideo/1")]
-        [InlineData("/Videos/Screen/1")]
+        [InlineData("/Videos/EditVideo/2")]
+        [InlineData("/Videos/DeleteVideo/2")]
+        [InlineData("/Videos/Screen/2")]
         [Trait("Category", "Integration")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
@@ -51,7 +51,7 @@ namespace AspCoreDemoApp.Test
 
         [Fact]
         [Trait("Category", "Integration")]
-        public async Task Post_DeleteAllMessagesHandler_ReturnsRedirectToVideoIndex()
+        public async Task Post_DeleteVideoHandler_ReturnsRedirectToVideoIndex()
         {
             // Arrange
             var defaultPage = await client.GetAsync("/Videos/DeleteVideo/1");
