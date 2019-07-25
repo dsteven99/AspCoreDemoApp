@@ -1,7 +1,10 @@
-﻿using AspCoreDemoApp.Data;
+﻿using AngleSharp.Html.Dom;
+using AspCoreDemoApp.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -11,10 +14,14 @@ namespace AspCoreDemoApp.Test
     public class IntegrationTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> factory;
-
+        private readonly HttpClient client;
         public IntegrationTest(CustomWebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
+           client = factory.CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
         }
 
         [Theory]
@@ -31,7 +38,7 @@ namespace AspCoreDemoApp.Test
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange
-            var client = factory.CreateClient();
+            
 
             // Act
             var response = await client.GetAsync(url);
@@ -40,6 +47,25 @@ namespace AspCoreDemoApp.Test
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             Assert.Equal("text/html; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
+        }
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        public async Task Post_DeleteAllMessagesHandler_ReturnsRedirectToIndex()
+        {
+            // Arrange
+            var defaultPage = await client.GetAsync("/Videos/DeleteVideo/1");
+            var content = await HtmlHelpers.GetDocumentAsync(defaultPage);
+
+            //Act
+            var response = await client.SendAsync(
+                (IHtmlFormElement)content.QuerySelector("form"),
+                (IHtmlButtonElement)content.QuerySelector("button"));
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, defaultPage.StatusCode);
+            Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+            Assert.Equal("/Videos/1", response.Headers.Location.OriginalString);
         }
     }
 }
