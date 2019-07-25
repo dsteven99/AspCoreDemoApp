@@ -51,7 +51,7 @@ namespace AspCoreDemoApp.Test
 
         [Fact]
         [Trait("Category", "Integration")]
-        public async Task Post_DeleteAllMessagesHandler_ReturnsRedirectToIndex()
+        public async Task Post_DeleteAllMessagesHandler_ReturnsRedirectToVideoIndex()
         {
             // Arrange
             var defaultPage = await client.GetAsync("/Videos/DeleteVideo/1");
