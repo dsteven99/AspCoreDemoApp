@@ -24,37 +24,7 @@ namespace AspCoreDemoApp.Test
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange
-            var client = factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services =>
-                {
-                    var serviceProvider = services.BuildServiceProvider();
-
-                    using (var scope = serviceProvider.CreateScope())
-                    {
-                        var scopedServices = scope.ServiceProvider;
-                        var db = scopedServices
-                            .GetRequiredService<VideoDbContext>();
-                        var logger = scopedServices
-                            .GetRequiredService<ILogger<IntegrationTests>>();
-
-                        try
-                        {
-                            Utilities.InitializeDbForTests(db);
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.LogError(ex, "An error occurred seeding " +
-                                "the database with test messages. Error: " +
-                                ex.Message);
-                        }
-                    }
-                });
-            })
-       .CreateClient(new WebApplicationFactoryClientOptions
-       {
-           AllowAutoRedirect = false
-       });
+            var client = factory.CreateClient();
 
             // Act
             var response = await client.GetAsync(url);
