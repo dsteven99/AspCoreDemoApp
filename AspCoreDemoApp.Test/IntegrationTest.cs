@@ -20,6 +20,13 @@ namespace AspCoreDemoApp.Test
         [Theory]
         [InlineData("/Index")]
         [InlineData("/EditChannel/1")]
+        [InlineData("/DeleteChannel/1")]
+        [InlineData("/AddChannel")]
+        [InlineData("/Videos/Index/1")]
+        [InlineData("/Videos/AddVideo/1")]
+        [InlineData("/Videos/EditVideo/1")]
+        [InlineData("/Videos/DeleteVideo/1")]
+        [InlineData("/Videos/Screen/1")]
         [Trait("Category", "Integration")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
