@@ -27,5 +27,18 @@ namespace AspCoreDemoApp.Test
             driver.Navigate().GoToUrl("http:/localhost:5000");
             Assert.Equal("Home page - AspCoreDemoApp", driver.Title);
         }
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        public void SearchSongwritersChannel()
+        {
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("http:/localhost:5000");
+            driver.FindElement(By.ClassName("form-control"))
+                .SendKeys("Songwriters");
+            driver.FindElement(By.ClassName("form-control"))
+                .SendKeys(Keys.Enter);
+
+        }
     }
 }
