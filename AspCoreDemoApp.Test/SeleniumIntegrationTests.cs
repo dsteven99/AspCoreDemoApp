@@ -24,8 +24,8 @@ namespace AspCoreDemoApp.Test
         public void ValidateChannelPageTitle()
         {
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://msdn.microsoft.com/magazine/dd767791");
-            Assert.Equal("MSDN Magazine", driver.Title);
+            driver.Navigate().GoToUrl("http:/localhost:5000");
+            Assert.Equal("Home page - AspCoreDemoApp", driver.Title);
         }
     }
 }
