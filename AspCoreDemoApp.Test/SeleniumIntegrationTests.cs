@@ -40,5 +40,19 @@ namespace AspCoreDemoApp.Test
                 .SendKeys(Keys.Enter);
 
         }
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        public void AddNewChannel()
+        {
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("http:/localhost:5000");
+            driver.FindElement(By.XPath("//a[@href='/AddChannel']")).Click();
+            driver.FindElement(By.Name("Channel.Title"))
+                .SendKeys("Test Channel Title");
+            driver.FindElement(By.Name("Channel.Description"))
+               .SendKeys("Test Channel Description");
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+        }
     }
 }
