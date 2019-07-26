@@ -12,6 +12,10 @@ using Xunit;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using AspCoreDemoApp.Core;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.IO;
+using System.Reflection;
 
 namespace AspCoreDemoApp.Test
 {
@@ -19,6 +23,8 @@ namespace AspCoreDemoApp.Test
     {
         private readonly CustomWebApplicationFactory<Startup> factory;
         private readonly HttpClient client;
+        public IWebDriver driver;
+
         public IntegrationTests(CustomWebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
@@ -26,6 +32,8 @@ namespace AspCoreDemoApp.Test
             {
                 AllowAutoRedirect = false
             });
+
+            driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
         }
 
         [Theory]
@@ -125,6 +133,15 @@ namespace AspCoreDemoApp.Test
             Assert.Contains("", h4Element.InnerHtml);
                 
 
+        }
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        public void ValidateChannelPageTitle()
+        {
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://msdn.microsoft.com/magazine/dd767791");
+            Assert.Equal("MSDN Magazine", driver.Title);
         }
     }
 }
