@@ -26,6 +26,7 @@ namespace AspCoreDemoApp.Test
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("http:/localhost:5000");
             Assert.Equal("Home page - AspCoreDemoApp", driver.Title);
+            driver.Close();
         }
 
         [Fact]
@@ -38,7 +39,7 @@ namespace AspCoreDemoApp.Test
                 .SendKeys("Songwriters");
             driver.FindElement(By.ClassName("form-control"))
                 .SendKeys(Keys.Enter);
-
+            driver.Close();
         }
 
         [Fact]
@@ -53,6 +54,7 @@ namespace AspCoreDemoApp.Test
             driver.FindElement(By.Name("Channel.Description"))
                .SendKeys("Test Channel Description");
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            driver.Close();
         }
     }
 }
