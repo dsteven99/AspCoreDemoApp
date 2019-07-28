@@ -52,7 +52,7 @@ namespace AspCoreDemoApp.Data
             else
             {
                 return db.Videos
-                    .Where(c => c.Title.Contains(searchTerm) || c.Description.Contains(searchTerm)).ToList();
+                    .Where(c => c.Title.Contains(searchTerm)).ToList();
             }
         }
 

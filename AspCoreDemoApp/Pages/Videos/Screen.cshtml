@@ -31,9 +31,9 @@
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '@Model.Video.height',
-                width: '@Model.Video.width',
-                videoId: '@Model.Video.code',
+                height: '@Model.Video.Height',
+                width: '@Model.Video.Width',
+                videoId: '@Model.Video.Code',
                 events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange

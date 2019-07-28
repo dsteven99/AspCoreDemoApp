@@ -37,33 +37,31 @@
     @foreach (var video in Model.Videos)
     {
 
-        <div class="col-md-2" style="padding-bottom: 10px">
-            <a asp-page="./Screen"
-               asp-route-id="@video.Id" title="Play">
-                @if (video.ImageUrl == null)
-                {
-                    <i class="fa fa-youtube-play"></i>
-                }
-                else
-                {
-                    <img src="@video.ImageUrl" alt="video image" width="175" />
-                }
+    <div class="col-md-3" style="padding-bottom: 10px">
+        <a asp-page="./Screen"
+           asp-route-id="@video.Id" title="Play">
+            @if (video.ImageUrl == null)
+            {
+                <i class="fa fa-youtube-play"></i>
+            }
+            else
+            {
+                <img src="@video.ImageUrl" alt="video image" style="width:100%" />
+            }
+        </a>
+        <div><b>@video.Title</b></div>
+        <div>
+            <a asp-page="./EditVideo"
+               asp-route-id="@video.Id" title="Edit">
+                <i class="fa fa-edit"></i>
+            </a>&nbsp;&nbsp;
+            <a asp-page="./DeleteVideo"
+               asp-route-id="@video.Id" title="Delete">
+                <i class="fa fa-trash"></i>
             </a>
         </div>
-        <div class="col-md-4">
-            <div><b>@video.Title</b></div>
-            <div>@video.Description</div>
-            <div>
-                <a asp-page="./EditVideo"
-                   asp-route-id="@video.Id" title="Edit">
-                    <i class="fa fa-edit"></i>
-                </a>&nbsp;&nbsp;
-                <a asp-page="./DeleteVideo"
-                   asp-route-id="@video.Id" title="Delete">
-                    <i class="fa fa-trash"></i>
-                </a>
-            </div>
-        </div>
+    </div>
+      
     }
 </div>
 @section Scripts {

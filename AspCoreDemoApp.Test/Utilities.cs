@@ -25,11 +25,10 @@ namespace AspCoreDemoApp.Test
                 Id = 1,
                 ChannelId = 1,
                 Title = "An Evening with John Denver",
-                Description = "",
-                code = "",
+                Code = "",
                 ImageUrl = "",
-                width = 740,
-                height = 315
+                Width = 740,
+                Height = 315
             });
 
             db.Videos.Add(new Video()
@@ -37,11 +36,10 @@ namespace AspCoreDemoApp.Test
                 Id = 2,
                 ChannelId = 1,
                 Title = "An Evening with Paul Simon",
-                Description = "",
-                code = "",
+                Code = "",
                 ImageUrl = "",
-                width = 740,
-                height = 315
+                Width = 740,
+                Height = 315
             });
 
             db.SaveChanges();
