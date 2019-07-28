@@ -27,11 +27,6 @@
         <input asp-for="Video.Height" class="form-control" />
         <span class="text-danger" asp-validation-for="Video.Height"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Video.ImageUrl">Image URL</label>
-        <input asp-for="Video.ImageUrl" class="form-control" />
-        <span class="text-danger" asp-validation-for="Video.ImageUrl"></span>
-    </div>
     <button type="submit" class="btn btn-outline-primary">Save</button>
     <a asp-page="Index" class="btn btn-outline-secondary" asp-route-id="@Model.Channel.Id">Cancel</a>
 </form>

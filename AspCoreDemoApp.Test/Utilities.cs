@@ -26,7 +26,6 @@ namespace AspCoreDemoApp.Test
                 ChannelId = 1,
                 Title = "An Evening with John Denver",
                 Code = "",
-                ImageUrl = "",
                 Width = 740,
                 Height = 315
             });
@@ -37,7 +36,6 @@ namespace AspCoreDemoApp.Test
                 ChannelId = 1,
                 Title = "An Evening with Paul Simon",
                 Code = "",
-                ImageUrl = "",
                 Width = 740,
                 Height = 315
             });

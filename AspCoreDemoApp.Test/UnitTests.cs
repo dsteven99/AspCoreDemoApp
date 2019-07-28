@@ -54,7 +54,6 @@ namespace AspCoreDemoApp.Test
                     ChannelId = 1,
                     Title = "An Evening with John Denver",
                     Code = "",
-                    ImageUrl = "",
                     Width = 740,
                     Height = 315
                 });
@@ -65,7 +64,6 @@ namespace AspCoreDemoApp.Test
                     ChannelId = 1,
                     Title = "An Evening with Paul Simon",
                     Code = "",
-                    ImageUrl = "",
                     Width = 740,
                     Height = 315
                 });
@@ -109,7 +107,6 @@ namespace AspCoreDemoApp.Test
                     ChannelId = 1,
                     Title = "An Evening with John Denver",
                     Code = "",
-                    ImageUrl = "",
                     Width = 740,
                     Height = 315
                 });
@@ -120,7 +117,6 @@ namespace AspCoreDemoApp.Test
                     ChannelId = 1,
                     Title = "An Evening with Paul Simon",
                     Code = "",
-                    ImageUrl = "",
                     Width = 740,
                     Height = 315
                 });
@@ -177,7 +173,6 @@ namespace AspCoreDemoApp.Test
                     Id = 1,
                     ChannelId = 1,
                     Code = "",
-                    ImageUrl = "",
                     Width = 740,
                     Height = 315
                 };
@@ -238,7 +233,6 @@ namespace AspCoreDemoApp.Test
                     ChannelId = 2,
                     Title = "This is a Title",
                     Code = "",
-                    ImageUrl = "",
                     Width = 740,
                     Height = 315
                 };

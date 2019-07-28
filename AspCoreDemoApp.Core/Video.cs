@@ -20,7 +20,6 @@ namespace AspCoreDemoApp.Core
         public int Width { get; set; }
         [Required]
         public int Height { get; set; }
-        public string ImageUrl { get; set; }
 
     }
 }
