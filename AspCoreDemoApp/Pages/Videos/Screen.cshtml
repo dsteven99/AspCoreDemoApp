@@ -12,12 +12,57 @@
         </a>
     </div>
 </div>
-<div class="row text-center">
-    <div class="col-md-12">
-        <iframe width="@Model.Video.width.ToString()" height="@Model.Video.width.ToString()"
-                src="https://www.youtube-nocookie.com/embed/@Model.Video.code"
-                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+<div class="text-center">
+    <div id="player">
+
     </div>
 </div>
 
+
+@section Scripts {
+    <script>
+              
+        var tag = document.createElement('script');
+     
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '@Model.Video.height',
+                width: '@Model.Video.width',
+                videoId: '@Model.Video.code',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // autoplay video
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // when video ends
+        function onPlayerStateChange(event) {
+            if (event.data === 0) {
+
+                $.ajax(
+                {
+                    url: "/api/video/@Model.Video.Id",
+                    success: function (response) {
+                        window.location.href = "/Videos/Screen/" + response;
+                    },
+                    error: function (error) {
+                        console.log('error', error);
+                    }
+                })
+            }
+        }   
+
+    </script>
+    
+}

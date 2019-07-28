@@ -22,6 +22,7 @@ namespace AspCoreDemoApp.Core
         [Required]
         public int height { get; set; }
         public string ImageUrl { get; set; }
+        public int Duration { get; set; }
 
     }
 }
