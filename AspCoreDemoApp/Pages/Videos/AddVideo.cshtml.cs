@@ -26,7 +26,8 @@ namespace AspCoreDemoApp.Pages.Videos
         {
             Video = new Video();
             Video.ChannelId = channelId;
-
+            Video.Width = 640;
+            Video.Height = 390;
             Channel = channelData.GetById(channelId);
 
             if(Channel == null)
