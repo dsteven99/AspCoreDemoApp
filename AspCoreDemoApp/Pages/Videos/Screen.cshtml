@@ -16,6 +16,12 @@
     <div id="player">
 
     </div>
+    <div>
+        <i class="fa fa-step-backward fa-lg" style="margin: 20px;cursor:pointer" 
+           title="Previous" onclick="onPreviousVideoClicked()"></i>
+        <i class="fa fa-step-forward fa-lg" style="margin: 20px;cursor:pointer" 
+           title="Next" onclick="onNextVideoClicked()"></i>
+    </div>
 </div>
 
 
@@ -32,7 +38,7 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '@Model.Video.Height',
-                width: '@Model.Video.Width',
+                width: '100%',
                 videoId: '@Model.Video.Code',
                 events: {
                     'onReady': onPlayerReady,
@@ -52,7 +58,7 @@
 
                 $.ajax(
                 {
-                    url: "/api/video/@Model.Video.Id",
+                    url: "/api/video/next/@Model.Video.Id",
                     success: function (response) {
                         window.location.href = "/Videos/Screen/" + response;
                     },
@@ -61,7 +67,35 @@
                     }
                 })
             }
-        }   
+        }
+
+        //next is clicked
+        function onNextVideoClicked() {
+            $.ajax(
+                {
+                    url: "/api/video/next/@Model.Video.Id",
+                    success: function (response) {
+                        window.location.href = "/Videos/Screen/" + response;
+                    },
+                    error: function (error) {
+                        console.log('error', error);
+                    }
+                })
+        }
+
+        //previous is clicked
+        function onPreviousVideoClicked() {
+            $.ajax(
+                {
+                    url: "/api/video/previous/@Model.Video.Id",
+                    success: function (response) {
+                        window.location.href = "/Videos/Screen/" + response;
+                    },
+                    error: function (error) {
+                        console.log('error', error);
+                    }
+                })
+        }
 
     </script>
     
