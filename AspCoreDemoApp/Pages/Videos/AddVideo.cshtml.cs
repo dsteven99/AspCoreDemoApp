@@ -24,13 +24,18 @@ namespace AspCoreDemoApp.Pages.Videos
 
         public IActionResult OnGet(int channelId)
         {
+            return Initialize(channelId);
+        }
+
+        private IActionResult Initialize(int channelId)
+        {
             Video = new Video();
             Video.ChannelId = channelId;
             Video.Width = 640;
             Video.Height = 390;
             Channel = channelData.GetById(channelId);
 
-            if(Channel == null)
+            if (Channel == null)
             {
                 return BadRequest();
             }
@@ -42,7 +47,7 @@ namespace AspCoreDemoApp.Pages.Videos
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return Initialize(channelId);
             }
 
             Channel = channelData.GetById(channelId);
