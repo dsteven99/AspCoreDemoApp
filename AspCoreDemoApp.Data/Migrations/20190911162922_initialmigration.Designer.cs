@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspCoreDemoApp.Data.Migrations
 {
     [DbContext(typeof(VideoDbContext))]
-    [Migration("20190728230021_deleteimageurl")]
-    partial class deleteimageurl
+    [Migration("20190911162922_initialmigration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

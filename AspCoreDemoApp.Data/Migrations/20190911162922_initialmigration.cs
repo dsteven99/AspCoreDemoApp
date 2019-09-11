@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspCoreDemoApp.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,8 +31,9 @@ namespace AspCoreDemoApp.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(maxLength: 75, nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true)
+                    Code = table.Column<string>(maxLength: 100, nullable: false),
+                    Width = table.Column<int>(nullable: false),
+                    Height = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
