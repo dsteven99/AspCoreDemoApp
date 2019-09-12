@@ -58,9 +58,9 @@
 
                 $.ajax(
                 {
-                    url: "/videos/api/video/next/@Model.Video.Id",
+                    url: "/api/video/next/@Model.Video.Id",
                     success: function (response) {
-                        window.location.href = "/Videos/Videos/Screen/" + response;
+                        window.location.href = "/Videos/Screen/" + response;
                     },
                     error: function (error) {
                         console.log('error', error);
@@ -73,9 +73,9 @@
         function onNextVideoClicked() {
             $.ajax(
                 {
-                    url: "/videos/api/video/next/@Model.Video.Id",
+                    url: "/api/video/next/@Model.Video.Id",
                     success: function (response) {
-                        window.location.href = "/Videos/Videos/Screen/" + response;
+                        window.location.href = "/Videos/Screen/" + response;
                     },
                     error: function (error) {
                         console.log('error', error);
@@ -87,9 +87,9 @@
         function onPreviousVideoClicked() {
             $.ajax(
                 {
-                    url: "/videos/api/video/previous/@Model.Video.Id",
+                    url: "/api/video/previous/@Model.Video.Id",
                     success: function (response) {
-                        window.location.href = "/Videos/Videos/Screen/" + response;
+                        window.location.href = "/Videos/Screen/" + response;
                     },
                     error: function (error) {
                         console.log('error', error);
