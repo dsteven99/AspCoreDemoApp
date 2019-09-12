@@ -58,7 +58,7 @@
 
                 $.ajax(
                 {
-                    url: "/api/video/next/@Model.Video.Id",
+                    url: "/videos/api/video/next/@Model.Video.Id",
                     success: function (response) {
                         window.location.href = "/Videos/Screen/" + response;
                     },
@@ -73,7 +73,7 @@
         function onNextVideoClicked() {
             $.ajax(
                 {
-                    url: "/api/video/next/@Model.Video.Id",
+                    url: "/videos/api/video/next/@Model.Video.Id",
                     success: function (response) {
                         window.location.href = "/Videos/Screen/" + response;
                     },
@@ -87,7 +87,7 @@
         function onPreviousVideoClicked() {
             $.ajax(
                 {
-                    url: "/api/video/previous/@Model.Video.Id",
+                    url: "/videos/api/video/previous/@Model.Video.Id",
                     success: function (response) {
                         window.location.href = "/Videos/Screen/" + response;
                     },
