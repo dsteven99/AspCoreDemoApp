@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Screen";
 }
-
 <div class="row">
     <div class="col-md-12">
         <a asp-page="./Index" class="btn btn-link btn-sm" asp-route-id="@Model.Video.Channel.Id"
@@ -14,31 +13,31 @@
 </div>
 <div class="text-center">
     <div id="player">
-
     </div>
     <div>
-        <i class="fa fa-step-backward fa-lg" style="margin: 20px;cursor:pointer" 
+        <i class="fa fa-step-backward fa-lg" style="margin: 20px;cursor:pointer"
            title="Previous" onclick="onPreviousVideoClicked()"></i>
-        <i class="fa fa-step-forward fa-lg" style="margin: 20px;cursor:pointer" 
+        <i class="fa fa-step-forward fa-lg" style="margin: 20px;cursor:pointer"
            title="Next" onclick="onNextVideoClicked()"></i>
     </div>
 </div>
 
-
 @section Scripts {
+   
     <script>
-              
+
         var tag = document.createElement('script');
-     
+
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
+
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '@Model.Video.Height',
-                width: '100%',
+           player = new YT.Player('player', {
+                height: '390',
+                width: '640',
                 videoId: '@Model.Video.Code',
                 events: {
                     'onReady': onPlayerReady,
@@ -98,5 +97,5 @@
         }
 
     </script>
-    
+
 }
