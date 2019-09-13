@@ -21,7 +21,6 @@ namespace AspCoreDemoApp.Pages.Videos
             this.videoData = videoData;
         }
 
-        [BindProperty]
         public string VideoID { get; set; }
 
         public int ChannelID { get; set; }
