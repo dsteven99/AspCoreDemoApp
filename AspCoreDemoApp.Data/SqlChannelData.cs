@@ -38,6 +38,11 @@ namespace AspCoreDemoApp.Data
             return item;
         }
 
+        public Channel GetByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
+
         public Channel GetById(int id)
         {
             return db.Channels.Include(c => c.Videos).SingleOrDefault(c => c.Id == id);

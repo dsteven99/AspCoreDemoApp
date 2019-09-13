@@ -5,10 +5,11 @@
 }
 <div class="row">
     <div class="col-md-12">
-        <a asp-page="./Index" class="btn btn-link btn-sm" asp-route-id="@Model.Video.Channel.Id"
+        <a asp-page="./Index" class="btn btn-link btn-sm" asp-route-id="@Model.ChannelID"
            asp-route-SearchTerm="@Model.VideoSearchTerm">
             <i class="fa fa-arrow-circle-left"></i>&nbsp;Back to Videos
         </a>
+        <input type="hidden" id="VideoID"  asp-for="VideoID" />
     </div>
 </div>
 <div class="text-center">
@@ -25,7 +26,7 @@
 @section Scripts {
    
     <script>
-
+        
         var tag = document.createElement('script');
 
         tag.src = "https://www.youtube.com/iframe_api";
@@ -38,7 +39,7 @@
            player = new YT.Player('player', {
                 height: '390',
                 width: '640',
-                videoId: '@Model.Video.Code',
+                videoId: '@Model.VideoID',
                 events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
@@ -57,9 +58,10 @@
 
                 $.ajax(
                 {
-                    url: "/youtube/api/video/next/@Model.Video.Id",
+                    url: '/youtube/api/video/next/' + $('#VideoID').val(),
                     success: function (response) {
-                        window.location.href = "/Youtube/Videos/Screen/" + response;
+                        player.loadVideoById(response);
+                        $('#VideoID').val(response);
                     },
                     error: function (error) {
                         console.log('error', error);
@@ -70,11 +72,13 @@
 
         //next is clicked
         function onNextVideoClicked() {
+           
             $.ajax(
                 {
-                    url: "/youtube/api/video/next/@Model.Video.Id",
+                    url: '/youtube/api/video/next/' + $('#VideoID').val(),
                     success: function (response) {
-                        window.location.href = "/Youtube/Videos/Screen/" + response;
+                        player.loadVideoById(response);
+                        $('#VideoID').val(response);
                     },
                     error: function (error) {
                         console.log('error', error);
@@ -86,9 +90,10 @@
         function onPreviousVideoClicked() {
             $.ajax(
                 {
-                    url: "/youtube/api/video/previous/@Model.Video.Id",
+                    url: "/youtube/api/video/previous/" + $('#VideoID').val(),
                     success: function (response) {
-                        window.location.href = "/Youtube/Videos/Screen/" + response;
+                        player.loadVideoById(response);
+                        $('#VideoID').val(response);
                     },
                     error: function (error) {
                         console.log('error', error);

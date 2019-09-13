@@ -38,6 +38,11 @@ namespace AspCoreDemoApp.Data
             return item;
         }
 
+        public Video GetByCode(string code)
+        {
+            return db.Videos.Include(v => v.Channel).SingleOrDefault(c => c.Code == code);
+        }
+
         public Video GetById(int id)
         {
             return db.Videos.Include(v => v.Channel).SingleOrDefault(c => c.Id == id);

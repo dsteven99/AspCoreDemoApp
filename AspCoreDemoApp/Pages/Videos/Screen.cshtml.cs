@@ -21,16 +21,22 @@ namespace AspCoreDemoApp.Pages.Videos
             this.videoData = videoData;
         }
 
-        public Video Video { get; set; }
-        public Channel Channel { get; set; }
+        [BindProperty]
+        public string VideoID { get; set; }
 
+        public int ChannelID { get; set; }
+       
         public IActionResult OnGet(int id)
         {
-            Video = videoData.GetById(id);
+            var Video = videoData.GetById(id);
             if(Video == null)
             {
                 return BadRequest();
             }
+
+            VideoID = Video.Code;
+
+            ChannelID = Video.ChannelId;
 
             VideoSearchTerm = HttpContext.Session.GetString("VideoSearchTerm");
 

@@ -9,6 +9,7 @@ namespace AspCoreDemoApp.Data
     {
         IEnumerable<T> GetItems(string searchTerm);
         T GetById(int id);
+        T GetByCode(string code);
         T Update(T updatedItem);
         T Add(T newItem);
         T Delete(int id);
