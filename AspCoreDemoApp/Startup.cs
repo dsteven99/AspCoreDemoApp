@@ -36,19 +36,10 @@ namespace AspCoreDemoApp
             services.AddScoped<IData<Channel>, SqlChannelData>();
             services.AddScoped<IData<Video>, SqlVideoData>();
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-
-            services.AddMvc()
-                .AddSessionStateTempDataProvider()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddSession();
+            services.AddRazorPages();
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,9 +57,17 @@ namespace AspCoreDemoApp
             UseNodeFolder(app, env, "node_modules");
 
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+
+            app.UseRouting();
+
+            //app.UseAuthorization();
+
             app.UseSession();
             app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+            });
         }
 
         private static void UseNodeFolder(IApplicationBuilder app, IHostingEnvironment env, string path)
